@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Respawn Timer - RPG Style</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="particles-container" id="particles"></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <h1 class="title">
+                <i class="fas fa-dragon"></i>
+                ELITE TIMER
+                <i class="fas fa-dragon"></i>
+            </h1>
+            <p class="subtitle">GERENCIE OS RESPAWNS DOS ELITES</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="top-panel">
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="elite-select">Selecionar Elite:</label>
+                    <select id="elite-select" class="elite-select">
+                        <option value="">Escolha um elite...</option>
+                    </select>
+                </div>
+                
+                <div class="time-input-group">
+                    <label>Horário da Morte:</label>
+                    <div class="time-inputs">
+                        <input type="number" id="death-hour" min="0" max="23" placeholder="HH" class="time-input">
+                        <span>:</span>
+                        <input type="number" id="death-minute" min="0" max="59" placeholder="MM" class="time-input">
+                        <span>:</span>
+                        <input type="number" id="death-second" min="0" max="59" placeholder="SS" class="time-input">
+                    </div>
+                </div>
+                
+                <button id="set-death-time" class="btn-primary">
+                    <i class="fas fa-skull"></i>
+                    Definir Morte
+                </button>
+                
+                <button id="clear-all" class="btn-secondary">
+                    <i class="fas fa-trash"></i>
+                    Limpar Todos
+                </button>
+            </div>
+
+            <div class="next-spawn-section">
+                <h3 class="section-subtitle">Próximo Elite a Nascer</h3>
+                <div id="next-spawn-info" class="next-spawn-info">
+                    Nenhum elite definido.
+                </div>
+            </div>
+        </div>
+<section class="logs-section" id="elite-logs-container"></section>
+</section>
+        <div class="all-elites-section">
+            <div class="elite-grid" id="all-elites-grid">
+                <!-- All Elites will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="notification-modal">
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="notification-text">
+                <h3 id="notification-title">Elite Próximo!</h3>
+                <p id="notification-message"></p>
+            </div>
+            <button id="close-notification" class="btn-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio elements for notifications -->
+    <audio id="notification-sound" preload="auto">
+        <source src="notification.wav" type="audio/wav">
+        <source src="notification.mp3" type="audio/mpeg">
+        <source src="notification.ogg" type="audio/ogg">
+    </audio>
+
+    <script src="elites.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
