@@ -7,7 +7,7 @@ const elites = [
     },
     {
         name: "Alpha Male (Worlax)",
-        location: "Worlax, Yellow Rare Spawn",
+        location: "Worlax",
         respawn: 120, // minutes
         image: "images/elites/Alpha_Male.png"
     },
@@ -31,7 +31,7 @@ const elites = [
     },
     {
         name: "Black Widow",
-        location: "Zagre Cave, Yelllow Rare Spawn",
+        location: "Zagre Cave",
         respawn: 120, // minutes
         image: "images/elites/Black_Widow.png"
     },
@@ -85,7 +85,7 @@ const elites = [
     },
     {
         name: "Golden Scarab (Pyramid Floor 1)",
-        location: "Pyramid Floor 1, Green possible spawn?",
+        location: "Pyramid Floor 1",
         respawn: 30, // minutes
         image: "images/elites/Golden_Scarab.png"
     },
