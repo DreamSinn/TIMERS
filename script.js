@@ -97,12 +97,20 @@ addLog(eliteName, action) {
                     <i class="fas fa-trash"></i>
                     Limpar Histórico
                 </button>
+                <button class="btn-small btn-show-stats" onclick="eliteTimer.showMissedSpawnsStats()">
+                    <i class="fas fa-chart-bar"></i>
+                    Estatísticas
+                </button>
             </div>
             <div class="logs-grid" id="elite-logs-grid"></div>
         `;
 
         const logsGrid = document.getElementById("elite-logs-grid");
-        this.eliteLogs.forEach(log => {
+        
+        // Mostrar apenas os últimos 20 logs
+        const recentLogs = this.eliteLogs.slice(0, 20);
+        
+        recentLogs.forEach(log => {
             const logElement = document.createElement("div");
             logElement.className = "log-entry";
             logElement.innerHTML = `
@@ -112,6 +120,10 @@ addLog(eliteName, action) {
             `;
             logsGrid.appendChild(logElement);
         });
+
+        if (recentLogs.length === 0) {
+            logsGrid.innerHTML = '<div class="no-logs">Nenhum log disponível</div>';
+        }
     }
 
 clearLogs() {
@@ -121,6 +133,90 @@ clearLogs() {
             this.renderLogSection();
         }
     }
+
+showMissedSpawnsStats() {
+    const now = new Date();
+    const statsData = {};
+    
+    // Calcular estatísticas para cada elite
+    this.elites.forEach((elite, index) => {
+        if (this.timers[index]) {
+            const deathTime = new Date(this.timers[index]);
+            const respawnTime = new Date(deathTime.getTime() + (elite.respawn * 60 * 1000));
+            
+            if (now > respawnTime) {
+                // Calcular quantos spawns foram perdidos
+                const timeSinceRespawn = now - respawnTime;
+                const missedSpawns = Math.floor(timeSinceRespawn / (elite.respawn * 60 * 1000)) + 1;
+                
+                if (missedSpawns > 0) {
+                    statsData[elite.name] = {
+                        missedSpawns: missedSpawns,
+                        lastRespawn: respawnTime,
+                        nextRespawn: new Date(respawnTime.getTime() + (missedSpawns * elite.respawn * 60 * 1000)),
+                        location: elite.location
+                    };
+                }
+            }
+        }
+    });
+
+    this.showStatsModal(statsData);
+}
+
+showStatsModal(statsData) {
+    const modal = document.createElement("div");
+    modal.className = "stats-modal";
+    
+    let statsContent = '<h3>Estatísticas de Spawns Perdidos</h3>';
+    
+    if (Object.keys(statsData).length === 0) {
+        statsContent += '<p class="no-missed-spawns">Nenhum spawn perdido no momento!</p>';
+    } else {
+        statsContent += '<div class="stats-grid">';
+        
+        Object.entries(statsData).forEach(([eliteName, data]) => {
+            const timeUntilNext = data.nextRespawn - new Date();
+            const timeUntilNextFormatted = this.formatTimeLeft(timeUntilNext);
+            
+            statsContent += `
+                <div class="stat-entry">
+                    <div class="stat-elite">${eliteName}</div>
+                    <div class="stat-location">${data.location}</div>
+                    <div class="stat-missed">Spawns perdidos: <span class="missed-count">${data.missedSpawns}</span></div>
+                    <div class="stat-next">Próximo em: <span class="next-time">${timeUntilNextFormatted}</span></div>
+                </div>
+            `;
+        });
+        
+        statsContent += '</div>';
+    }
+    
+    modal.innerHTML = `
+        <div class="stats-content">
+            ${statsContent}
+            <div class="modal-buttons">
+                <button class="btn-secondary" id="close-stats">
+                    <i class="fas fa-times"></i>
+                    Fechar
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    document.getElementById('close-stats').addEventListener('click', () => {
+        modal.remove();
+    });
+    
+    // Fechar ao clicar fora
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
 
 registerMissedSpawn(index, count, hour, minute) {
     const elite = this.elites[index];

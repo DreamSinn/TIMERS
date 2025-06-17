@@ -142,8 +142,63 @@ const elites = [
         location: "Abandon Mines Floor 1",
         respawn: 120, // minutes
         image: "images/elites/Termite_Queen.png"
+    },
+    {
+        name: "Edward",
+        location: "Puppet Master's Mansion floor 2",
+        respawn: 245, // minutes
+        image: "images/elites/Edward.png"
+    },
+    {
+        name: "Rat Queen",
+        location: "Catacombs 3nd Floor",
+        respawn: 125, // minutes
+        image: "images/elites/Rat_Queen.png"
+    },
+    {
+        name: "Baxbakualanuxiwaye",
+        location: "Battle Shores",
+        respawn: 305, // minutes
+        image: "images/elites/Baxbakualanuxiwaye.png"
+    },
+    {
+        name: "Dengur",
+        location: "Khabul",
+        respawn: 305, // minutes
+        image: "images/elites/Dengur.png"
+    },
+    {
+        name: "Voko",
+        location: "Hand of Frost",
+        respawn: 605, // minutes
+        image: "images/elites/Voko.png"
+    },
+    {
+        name: "Destructor",
+        location: "Mara Desert",
+        respawn: 305, // minutes
+        image: "images/elites/Destructor.png"
+    },
+    {
+        name: "Giant Tortolla",
+        location: "Trogul",
+        respawn: 305, // minutes
+        image: "images/elites/Giant_Tortolla.png"
+    },
+    {
+        name: "Ancient Treant",
+        location: "Catalania",
+        respawn: 88, // minutes
+        image: "images/elites/Ancient_Treant.png"
+    },
+    {
+        name: "Hugo",
+        location: "Battle Shores",
+        respawn: 305, // minutes (5h 5min)
+        image: "images/elites/Hugo.png"
     }
-    
+
+
 ];
 
 const eliteLogs = [];
