@@ -200,19 +200,19 @@ const elites = [
     {
         name: "Air Devourer",
         location: "Beta Enzyme",
-        respawn: 160, // minutes (02h:40m)
+        respawn: 173, // minutes (02h:40m)
         image: "images/elites/Air_Devourer.png"
     },
     {
         name: "Chaos Devourer",
         location: "Beta Enzyme",
-        respawn: 160, // minutes (02h:40m)
+        respawn: 173, // minutes (02h:40m)
         image: "images/elites/Chaos_Devourer.png"
     },
     {
         name: "Darkness Devourer",
         location: "Beta Enzyme",
-        respawn: 160, // minutes (02h:40m)
+        respawn: 173, // minutes (02h:40m)
         image: "images/elites/Darkness_Devourer.png"
     }
 
